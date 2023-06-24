@@ -10,8 +10,8 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-    /* Your push implementation */
     (void)stack;
     (void)line_number;
+    /* Your push implementation */
     /* Add your code here */
 }
