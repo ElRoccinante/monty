@@ -1,26 +1,28 @@
-#include <stdio.h>
 #include "monty.h"
 
 /**
- * pchar - Prints the character at the top of the stack
- * @stack: Double pointer to the stack
- * @line_number: Line number of the current opcode
+ * m_pchar - Prints the top stack number as ASCII character
+ * @node: Pointer to the head of the stack
+ * @line_count: Current line number
+ * Return: Void function
  */
-void pchar(stack_t **stack, unsigned int line_number)
+void m_pchar(stack_t **node, unsigned int line_count)
 {
-    if (*stack == NULL)
-    {
-        fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
-        exit(EXIT_FAILURE);
-    }
+	int num = 0;
 
-    int value = (*stack)->n;
-
-    if (value < 0 || value > 127)
-    {
-        fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
-        exit(EXIT_FAILURE);
-    }
-
-    printf("%c\n", value);
+	if (!*node || !node)
+	{
+		dprintf(2, "L%u: can't pchar, stack empty\n", line_count); // Error: Stack is empty
+		free_all(); // Free allocated memory
+		exit(EXIT_FAILURE); // Exit the program with failure status
+	}
+	num = (*node)->n; // Get the value of the top node
+	if ((num < 33) || (num > 127))
+	{
+		dprintf(2, "L%u: can't pchar, value out of range\n", line_count); // Error: Value is out of range
+		free_all(); // Free allocated memory
+		exit(EXIT_FAILURE); // Exit the program with failure status
+	}
+	putchar(num); // Print the ASCII character corresponding to the value
+	putchar('\n'); // Print a new line character
 }
