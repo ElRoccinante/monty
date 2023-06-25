@@ -1,12 +1,19 @@
 #include "monty.h"
 
-void free_stack(stack_t *stack) {
-    stack_t *current = stack;
-    stack_t *next;
+/**
+* _free_stack - Frees elements in the stack
+* @stack: stack
+*/
+void _free_stack(stack_t **stack)
+{
+	stack_t *curr = *stack;
+	stack_t *tmp;
 
-    while (current != NULL) {
-        next = current->next;
-        free(current);
-        current = next;
-    }
+	while (curr != NULL)
+	{
+		tmp = curr;
+		curr = curr->next;
+		free(tmp);
+	}
+	*stack = NULL;
 }
